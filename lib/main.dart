@@ -12,15 +12,12 @@ class MyApp extends StatefulWidget {
 
 class _State extends State<MyApp> {
   String _appBarName = "Flutter App";
-  String _value = "";
+  bool _value1 = false;
+  bool _value2 = false;
 
-  void _onChanged(String value) {
-    setState(() => _value = "Change: $value");
-  }
+  void _valeu1Changed(bool value) =>  setState(() => _value1 = value);
+  void _valeu2Changed(bool value) =>  setState(() => _value2 = value);
 
-  void _onSubmit(String value) {
-    setState(() => _value = "Submit: $value");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,34 +31,19 @@ class _State extends State<MyApp> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Text('$_value'),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: "Name",
-                  hintText: "Type your name",
-                  icon: Icon(Icons.people)
-                ),
-                autocorrect: true,
-                autofocus: true,
-                keyboardType: TextInputType.text,
-                onChanged: _onChanged,
-                onSubmitted: _onSubmit,
+              Checkbox(
+                value: _value1,
+                onChanged: _valeu1Changed
               ),
-              TextField(
-                decoration: InputDecoration(
-                    labelText: "Email",
-                    hintText: "Type your email",
-                    icon: Icon(Icons.email)
-                ),
+              CheckboxListTile(
+                value: _value2,
+                onChanged: _valeu2Changed,
+                title: Text("I Agree"),
+                controlAffinity: ListTileControlAffinity.leading,
+                subtitle: Text("I confirm I read the terms."),
+                secondary: Icon(Icons.assignment),
+                activeColor: Colors.red,
               ),
-              TextField(
-                decoration: InputDecoration(
-                    labelText: "Weight",
-                    hintText: "How heavy are you?",
-                    icon: Icon(Icons.restaurant)
-                ),
-                keyboardType: TextInputType.number,
-              )
             ],
           ),
         ),
