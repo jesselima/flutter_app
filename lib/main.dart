@@ -12,11 +12,54 @@ class MyApp extends StatefulWidget {
 
 class _State extends State<MyApp> {
   String _appBarName = "Flutter App";
-  bool _value1 = false;
-  bool _value2 = false;
 
-  void _valeu1Changed(bool value) =>  setState(() => _value1 = value);
-  void _valeu2Changed(bool value) =>  setState(() => _value2 = value);
+  // Radios need a initial values
+  int _value1 = 0;
+  int _value2 = 0;
+
+  void _setValue1(int value) =>  setState(() => _value1 = value);
+  void _setValue2(int value) =>  setState(() => _value2 = value);
+
+  Widget makeRadios() {
+    // List list = new List(); // Leads to Error: type 'List<dynamic>' is not a subtype of type 'List<Widget>'
+    List<Widget> list = [];
+
+    for(int i = 0; i < 3; i++) {
+      list.add(Radio(
+          value: i,
+          groupValue: _value1,
+          onChanged: _setValue1
+        )
+      );
+    }
+
+    Column column = Column(children: list);
+    // Return a list inside a column
+    return column;
+  }
+
+
+  Widget makeRadiosTile() {
+    // List list = new List(); // Leads to Error: type 'List<dynamic>' is not a subtype of type 'List<Widget>'
+    List<Widget> list = [];
+
+    for(int i = 0; i < 3; i++) {
+      list.add(RadioListTile(
+          value: i,
+          groupValue: _value2,
+          onChanged: _setValue2,
+          activeColor: Colors.green,
+          controlAffinity: ListTileControlAffinity.leading,
+          title: Text("Item $i"),
+          subtitle: Text("Subtitle $i"),
+        )
+      );
+    }
+
+    Column column = Column(children: list);
+    // Return a list inside a column
+    return column;
+  }
 
 
   @override
@@ -31,19 +74,9 @@ class _State extends State<MyApp> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Checkbox(
-                value: _value1,
-                onChanged: _valeu1Changed
-              ),
-              CheckboxListTile(
-                value: _value2,
-                onChanged: _valeu2Changed,
-                title: Text("I Agree"),
-                controlAffinity: ListTileControlAffinity.leading,
-                subtitle: Text("I confirm I read the terms."),
-                secondary: Icon(Icons.assignment),
-                activeColor: Colors.red,
-              ),
+              // Generate the list of radios
+              makeRadios(),
+              makeRadiosTile()
             ],
           ),
         ),
