@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(
@@ -15,9 +17,21 @@ class _State extends State<MyApp> {
   String _appBarName = "Flutter App";
 
   // Radios need a initial values
-  double _value = 0.0;
+  String _value = "";
 
-  void _setValue(double value) =>  setState(() => _value = value);
+  Future _selectDate() async {
+    DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2019),
+        lastDate: DateTime(2020)
+    );
+    if(picked != null) {
+      setState(() {
+        _value = picked.toString();
+      });
+    }
+  }
 
 
   @override
@@ -32,8 +46,11 @@ class _State extends State<MyApp> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Text('Value ${(_value * 100).round()}'),
-              Slider(value: _value, onChanged: _setValue)
+              Text(_value),
+              RaisedButton(
+                onPressed: _selectDate,
+                child: Text("Click me"),
+              ),
             ],
           ),
         ),
