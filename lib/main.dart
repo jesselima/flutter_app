@@ -19,9 +19,9 @@ class _State extends State<MyApp> {
   String _appBarName = "Flutter App";
   String _value = "Hello World!";
 
-  void _onClick(String value){
+  void _onClick(){
     setState(() {
-      _value = value;
+      _value = DateTime.now().toString();
     });
   }
 
@@ -39,7 +39,8 @@ class _State extends State<MyApp> {
           child: Column(
             children: <Widget>[
               Text(_value),
-              RaisedButton(onPressed: () => _onClick("New Text!!!!!"), child: Text("Change Text"))
+              RaisedButton(onPressed: _onClick, child: Text("Click me")),
+              FlatButton(onPressed: _onClick, child: Text("Click me"))
             ],
           ),
         ),
