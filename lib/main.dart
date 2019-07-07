@@ -17,14 +17,19 @@ class MyApp extends StatefulWidget {
 class _State extends State<MyApp> {
 
   String _appBarName = "Flutter App";
-  String _value = "Hello World!";
+  int _value = 0;
 
-  void _onClick(){
+  void _add(){
     setState(() {
-      _value = DateTime.now().toString();
+      _value++;
     });
   }
 
+  void _subtract(){
+    setState(() {
+      _value--;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +43,9 @@ class _State extends State<MyApp> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Text(_value),
-              RaisedButton(onPressed: _onClick, child: Text("Click me")),
-              FlatButton(onPressed: _onClick, child: Text("Click me"))
+              Text('Value: $_value'),
+              IconButton(icon: Icon(Icons.add), onPressed: _add),
+              IconButton(icon: Icon(Icons.remove), onPressed: _subtract)
             ],
           ),
         ),
