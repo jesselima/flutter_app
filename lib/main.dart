@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(
-    new MaterialApp(
-      home: MyApp()
-    )
-);
+void main() => runApp(new MaterialApp(home: MyApp()));
 
 // Attention for the circular reference for MyApp. Why?
 //...
@@ -15,20 +11,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _State extends State<MyApp> {
-
   String _appBarName = "Flutter App";
-  int _value = 0;
+  String _value = "";
 
-  void _add(){
-    setState(() {
-      _value++;
-    });
+  void _onChanged(String value) {
+    setState(() => _value = "Change: $value");
   }
 
-  void _subtract(){
-    setState(() {
-      _value--;
-    });
+  void _onSubmit(String value) {
+    setState(() => _value = "Submit: $value");
   }
 
   @override
@@ -43,14 +34,38 @@ class _State extends State<MyApp> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Text('Value: $_value'),
-              IconButton(icon: Icon(Icons.add), onPressed: _add),
-              IconButton(icon: Icon(Icons.remove), onPressed: _subtract)
+              Text('$_value'),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: "Name",
+                  hintText: "Type your name",
+                  icon: Icon(Icons.people)
+                ),
+                autocorrect: true,
+                autofocus: true,
+                keyboardType: TextInputType.text,
+                onChanged: _onChanged,
+                onSubmitted: _onSubmit,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                    labelText: "Email",
+                    hintText: "Type your email",
+                    icon: Icon(Icons.email)
+                ),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                    labelText: "Weight",
+                    hintText: "How heavy are you?",
+                    icon: Icon(Icons.restaurant)
+                ),
+                keyboardType: TextInputType.number,
+              )
             ],
           ),
         ),
       ),
     );
   }
-
 }
