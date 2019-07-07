@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 void main() => runApp(
@@ -14,24 +12,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _State extends State<MyApp> {
+
   String _appBarName = "Flutter App";
 
-  // Radios need a initial values
-  String _value = "";
+  int _value = 0;
 
-  Future _selectDate() async {
-    DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2019),
-        lastDate: DateTime(2020)
-    );
-    if(picked != null) {
-      setState(() {
-        _value = picked.toString();
-      });
-    }
-  }
+  void _add() =>  setState(() =>  _value++);
+  void _remove() => setState(() => _value--);
 
 
   @override
@@ -40,17 +27,23 @@ class _State extends State<MyApp> {
     return new Scaffold(
       appBar: AppBar(
         title: Text(_appBarName),
+        backgroundColor: Colors.redAccent,
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.add), onPressed: _add),
+          IconButton(icon: Icon(Icons.remove), onPressed: _remove)
+        ],
       ),
       body: Container(
         padding: EdgeInsets.all(32.0),
         child: Center(
           child: Column(
             children: <Widget>[
-              Text(_value),
-              RaisedButton(
-                onPressed: _selectDate,
-                child: Text("Click me"),
-              ),
+              Text(_value.toString(),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 37
+                ),
+              )
             ],
           ),
         ),
