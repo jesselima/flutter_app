@@ -15,11 +15,9 @@ class _State extends State<MyApp> {
   String _appBarName = "Flutter App";
 
   // Radios need a initial values
-  bool _value1 = false;
-  bool _value2 = false;
+  double _value = 0.0;
 
-  void _onChangeValue1(bool value) =>  setState(() => _value1 = value);
-  void _onChangeValue2(bool value) =>  setState(() => _value2 = value);
+  void _setValue(double value) =>  setState(() => _value = value);
 
 
   @override
@@ -34,22 +32,8 @@ class _State extends State<MyApp> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Switch(
-                  value: _value1, 
-                  onChanged: _onChangeValue1,
-              ),
-              SwitchListTile(
-                value: _value2,
-                onChanged: _onChangeValue2,
-                title: Text(
-                  "Notifications",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey
-                  ),
-                ),
-
-              )
+              Text('Value ${(_value * 100).round()}'),
+              Slider(value: _value, onChanged: _setValue)
             ],
           ),
         ),
