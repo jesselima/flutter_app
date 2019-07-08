@@ -14,15 +14,30 @@ class MyApp extends StatefulWidget {
 class _State extends State<MyApp> {
 
   String _appBarName = "Flutter App";
+  List<BottomNavigationBarItem> _items;
+  int _index = 0;
+
+  @override
+  void initState() {
+    _items = List();
+    _items.add(BottomNavigationBarItem(
+        icon: Icon(Icons.person_outline),
+        title: Text("Profile")));
+    _items.add(BottomNavigationBarItem(
+        icon: Icon(Icons.security),
+        title: Text("Security")));
+    _items.add(BottomNavigationBarItem(
+        icon: Icon(Icons.message),
+        title: Text("Messages")));
+  }
 
   int _value = 0;
   String dateView = "";
-  String footerString = "";
+  String bottomNavPositionText = "";
 
   void _add() =>  setState(() =>  _value++);
   void _remove() => setState(() => _value--);
   void _onClick() => setState(() => dateView = DateTime.now().toString());
-  void _onClickFooter(String value) => setState(() => footerString = value);
 
 
   @override
@@ -46,20 +61,13 @@ class _State extends State<MyApp> {
             children: <Widget>[
               Text("App Drawer"),
               RaisedButton(
-                onPressed: () => Navigator.pop(context), 
+                onPressed: () => Navigator.pop(context),
                 child: Text("Close"),
               )
             ],
           ),
         ),
       ),
-
-      persistentFooterButtons: <Widget>[
-        IconButton(icon: Icon(Icons.timer), onPressed: () => _onClickFooter("Footer Button 1")),
-        IconButton(icon: Icon(Icons.people), onPressed: () => _onClickFooter("Footer Button 2")),
-        IconButton(icon: Icon(Icons.map), onPressed: () => _onClickFooter("Footer Button 3")),
-        IconButton(icon: Icon(Icons.list), onPressed: () => _onClickFooter("Footer Button 4")),
-      ],
 
       floatingActionButton: FloatingActionButton(
           onPressed: _onClick,
@@ -80,15 +88,23 @@ class _State extends State<MyApp> {
                 ),
               ),
               Text(dateView),
-              Text(footerString,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                  )
-              )
+              Text(bottomNavPositionText),
             ],
           ),
         ),
+      ),
+
+      bottomNavigationBar: BottomNavigationBar(
+        items: _items,
+        fixedColor: Colors.blue,
+        currentIndex: _index,
+        onTap: (int item) {
+          setState(() {
+            _index = item;
+            bottomNavPositionText = "Current Botom Nav Pos is: ${_index.toString()}";
+          });
+        },
+
       ),
 
     );
