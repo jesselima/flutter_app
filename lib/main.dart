@@ -26,9 +26,16 @@ class _State extends State<MyApp> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Text("Hello World!"),
-              Text("Another text!")
-            ],
+              Text("Image demo:"),
+              Text("Local:"),
+              // TODO -> WORKING
+              Expanded(child: Image.asset("images/google-flutter-logo.png")),
+              Text("Network:"),
+              // TODO -> NOT WORKING
+              Expanded(child: Image.network('http://jesselima.tech/img/jesse.jpg')),
+              Expanded(child: Image.network('https://github.com/flutter/plugins/raw/master/packages/video_player/doc/demo_ipod.gif?raw=true')),
+              Expanded(child: Image.network('https://picsum.photos/250?image=9'))
+          ],
           ),
         ),
       ),
