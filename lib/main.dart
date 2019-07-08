@@ -17,10 +17,12 @@ class _State extends State<MyApp> {
 
   int _value = 0;
   String dateView = "";
+  String footerString = "";
 
   void _add() =>  setState(() =>  _value++);
   void _remove() => setState(() => _value--);
   void _onClick() => setState(() => dateView = DateTime.now().toString());
+  void _onClickFooter(String value) => setState(() => footerString = value);
 
 
   @override
@@ -36,6 +38,28 @@ class _State extends State<MyApp> {
           IconButton(icon: Icon(Icons.remove), onPressed: _remove)
         ],
       ),
+
+      drawer: Drawer(
+        child: Container(
+          padding: EdgeInsets.all(32),
+          child: Column(
+            children: <Widget>[
+              Text("App Drawer"),
+              RaisedButton(
+                onPressed: () => Navigator.pop(context), 
+                child: Text("Close"),
+              )
+            ],
+          ),
+        ),
+      ),
+
+      persistentFooterButtons: <Widget>[
+        IconButton(icon: Icon(Icons.timer), onPressed: () => _onClickFooter("Footer Button 1")),
+        IconButton(icon: Icon(Icons.people), onPressed: () => _onClickFooter("Footer Button 2")),
+        IconButton(icon: Icon(Icons.map), onPressed: () => _onClickFooter("Footer Button 3")),
+        IconButton(icon: Icon(Icons.list), onPressed: () => _onClickFooter("Footer Button 4")),
+      ],
 
       floatingActionButton: FloatingActionButton(
           onPressed: _onClick,
@@ -55,7 +79,13 @@ class _State extends State<MyApp> {
                   fontSize: 37
                 ),
               ),
-              Text(dateView)
+              Text(dateView),
+              Text(footerString,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  )
+              )
             ],
           ),
         ),
