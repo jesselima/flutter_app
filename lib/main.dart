@@ -14,6 +14,8 @@ class MyApp extends StatefulWidget {
 class _State extends State<MyApp> {
 
   String _appBarName = "Flutter App";
+
+  // BottomNavigationBar objects and setup. See also bottomNavigationBar at the Scaffold
   List<BottomNavigationBarItem> _items;
   int _index = 0;
 
@@ -31,6 +33,7 @@ class _State extends State<MyApp> {
         title: Text("Messages")));
   }
 
+  // AppBar and Clock (DateTime) Actions
   int _value = 0;
   String dateView = "";
   String bottomNavPositionText = "";
@@ -39,6 +42,31 @@ class _State extends State<MyApp> {
   void _remove() => setState(() => _value--);
   void _onClick() => setState(() => dateView = DateTime.now().toString());
 
+  // Bottom Sheet
+  void _showBottom() {
+    showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            padding: EdgeInsets.all(15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("Add Widgets Here!  ",
+                  style: TextStyle(color: Colors.red,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                RaisedButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text("Close"),
+                )
+              ],
+            ),
+          );
+        }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +117,7 @@ class _State extends State<MyApp> {
               ),
               Text(dateView),
               Text(bottomNavPositionText),
+              RaisedButton(onPressed: _showBottom, child: Text("Open BottomSheet"),)
             ],
           ),
         ),
