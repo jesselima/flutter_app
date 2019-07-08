@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(
@@ -73,11 +75,31 @@ class _State extends State<MyApp> {
   // What is a key? Is a way to reference the _scaffoldState inside a Scaffold.
   final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
+  // SnackBar
   void _showSnackBar() {
     //  _scaffoldState.currentState access the current ScaffoldState.
     //  ... In this case The "return new Scaffold(...
     _scaffoldState.currentState.showSnackBar(SnackBar(content: Text("Want a snack?")));
   }
+
+  // AlertDialog
+  Future _showDialog(BuildContext context, String message) {
+    return showDialog(
+        context: context,
+        child: AlertDialog(
+          title: Text(message),
+          actions: <Widget>[
+            FlatButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text("OK")
+            ),
+
+          ],
+        )
+    );
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +156,8 @@ class _State extends State<MyApp> {
               Text(dateView),
               Text(bottomNavPositionText),
               RaisedButton(onPressed: _showBottom, child: Text("Open BottomSheet"),),
-              RaisedButton(onPressed: _showSnackBar, child: Text("Show Snack"),)
+              RaisedButton(onPressed: _showSnackBar, child: Text("Show Snack"),),
+              RaisedButton(onPressed: () =>_showDialog(context, "Add Widgets Here"), child: Text("Show Dialog"),)
             ],
           ),
         ),
