@@ -13,6 +13,8 @@ class MyApp extends StatefulWidget {
   _State createState() => new _State();
 }
 
+enum Answers { YES, NO, MAYBE }
+
 class _State extends State<MyApp> {
 
   String _appBarName = "Flutter App";
@@ -100,6 +102,38 @@ class _State extends State<MyApp> {
   }
 
 
+  // SimpleDialog
+
+  String simpleDialogClickedValue = "";
+
+  void _setValue(String value) => setState( () => simpleDialogClickedValue = value);
+
+  Future _askUser() async {
+    switch(await
+      showDialog(
+          context: context,
+          child: SimpleDialog(
+            title: Text("My SImple Dialog"),
+            children: <Widget>[
+              SimpleDialogOption( child: Text("YES"),   onPressed: () { Navigator.pop(context, Answers.YES); }),
+              SimpleDialogOption( child: Text("NO"),    onPressed: () { Navigator.pop(context, Answers.NO); }),
+              SimpleDialogOption( child: Text("MAYBE"), onPressed: () { Navigator.pop(context, Answers.MAYBE); }),
+            ],
+          )
+      )) {
+
+    case Answers.YES:
+      _setValue("YES");
+      break;
+    case Answers.NO:
+      _setValue("NO");
+      break;
+    case Answers.MAYBE:
+      _setValue("MAYBE");
+      break;
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +191,9 @@ class _State extends State<MyApp> {
               Text(bottomNavPositionText),
               RaisedButton(onPressed: _showBottom, child: Text("Open BottomSheet"),),
               RaisedButton(onPressed: _showSnackBar, child: Text("Show Snack"),),
-              RaisedButton(onPressed: () =>_showDialog(context, "Add Widgets Here"), child: Text("Show Dialog"),)
+              RaisedButton(onPressed: () =>_showDialog(context, "Add Widgets Here"), child: Text("Show Alert Dialog"),),
+              RaisedButton(onPressed: () =>_askUser (), child: Text("Show Simple Dialog"),),
+              Text(simpleDialogClickedValue)
             ],
           ),
         ),
