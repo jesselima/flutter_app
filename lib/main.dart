@@ -68,10 +68,26 @@ class _State extends State<MyApp> {
     );
   }
 
+  // SnackBar
+  // Any control has a "key" property. (press Alt + Enter to see it). Container, AppBar, and so on.
+  // What is a key? Is a way to reference the _scaffoldState inside a Scaffold.
+  final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
+
+  void _showSnackBar() {
+    //  _scaffoldState.currentState access the current ScaffoldState.
+    //  ... In this case The "return new Scaffold(...
+    _scaffoldState.currentState.showSnackBar(SnackBar(content: Text("Want a snack?")));
+  }
+
   @override
   Widget build(BuildContext context) {
     // build refer to "render". To render something into the screen.
     return new Scaffold(
+
+      // Reference to GlobalKey<ScaffoldState> from the top. This key object allows us
+      //...to access the state of this Scaffold from outside. In this case
+      // ... from the _showSnackBar function
+      key: _scaffoldState,
 
       appBar: AppBar(
         title: Text(_appBarName),
@@ -117,7 +133,8 @@ class _State extends State<MyApp> {
               ),
               Text(dateView),
               Text(bottomNavPositionText),
-              RaisedButton(onPressed: _showBottom, child: Text("Open BottomSheet"),)
+              RaisedButton(onPressed: _showBottom, child: Text("Open BottomSheet"),),
+              RaisedButton(onPressed: _showSnackBar, child: Text("Show Snack"),)
             ],
           ),
         ),
