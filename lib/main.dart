@@ -14,6 +14,9 @@ class MyApp extends StatefulWidget {
 
 class _State extends State<MyApp> {
 
+  double _value = 0.0;
+
+  void _onChanged(double value) => setState(() => _value = value);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,52 @@ class _State extends State<MyApp> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Text("Some Text"),
+
+              Text(_value.toString()),
+
+              Slider(
+               value: _value,
+               onChanged: _onChanged,
+              ),
+
+              Container(
+                padding: EdgeInsets.all(20),
+                child: LinearProgressIndicator(
+                  value: _value,
+                ),
+              ),
+
+              Container(
+                padding: EdgeInsets.all(20),
+                child: LinearProgressIndicator(
+                  value: _value,
+                  valueColor: AlwaysStoppedAnimation(Colors.redAccent),
+                ),
+              ),
+
+              Container(
+                padding: EdgeInsets.all(20),
+                child: CircularProgressIndicator(
+                  value: _value,
+                ),
+              ),
+
+              Container(
+                padding: EdgeInsets.all(20),
+                child: CircularProgressIndicator(
+                  value: _value,
+                  valueColor: AlwaysStoppedAnimation(Colors.redAccent),
+                ),
+              ),
+
+              Container(
+                padding: EdgeInsets.all(20),
+                child: RefreshProgressIndicator(
+                  value: _value,
+                  valueColor: AlwaysStoppedAnimation(Colors.green),
+                ),
+              ),
+
             ],
           ),
         ),
