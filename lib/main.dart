@@ -17,11 +17,7 @@ class _State extends State<MyApp> {
   String _appBarName = "Flutter App";
   String _value = "Hello World!";
 
-  void _onClick(){
-    setState(() {
-      _value = "Text clicked and state changed";
-    });
-  }
+  void _onClick() => setState(() => _value = DateTime.now().toString());
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +32,11 @@ class _State extends State<MyApp> {
           child: Column(
             children: <Widget>[
               Text(_value),
-              RaisedButton(onPressed: _onClick, child: Text("Change Text"))
+              IconButton(
+                icon: Icon(Icons.timer),
+                onPressed: _onClick,
+                tooltip: "Click me!",
+              )
             ],
           ),
         ),
