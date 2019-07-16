@@ -7,25 +7,36 @@ void main() => runApp(
 );
 
 class MyApp extends StatefulWidget {
+
   @override
   _State createState() => new _State();
 }
 
 class _State extends State<MyApp> {
+
+  String _appBarName = "Flutter App";
+  String _value = "Hello World!";
+
+  void _onClick(){
+    setState(() {
+      _value = "Text clicked and state changed";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+
     return new Scaffold(
       appBar: AppBar(
-        title: Text("Name Here"),
+        title: Text(_appBarName),
       ),
       body: Container(
         padding: EdgeInsets.all(32.0),
         child: Center(
           child: Column(
             children: <Widget>[
-              Text("Hello World!"),
-              Text("Another text!")
+              Text(_value),
+              RaisedButton(onPressed: _onClick, child: Text("Change Text"))
             ],
           ),
         ),
