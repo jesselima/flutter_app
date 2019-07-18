@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'clock.dart';
 import 'mywidget.dart';
 
 void main() => runApp(
@@ -29,7 +30,9 @@ class _State extends State<MyApp> {
         child: Center(
           child: Column(
             children: <Widget>[
-              MyWidget()
+              MyWidget(),
+              Text("My Custom View With Clock"),
+              Clock()
             ],
           ),
         ),
