@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'mywidget.dart';
+
 void main() => runApp(
     new MaterialApp(
       home: MyApp()
@@ -27,7 +29,7 @@ class _State extends State<MyApp> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Text("Some Text"),
+              MyWidget()
             ],
           ),
         ),
