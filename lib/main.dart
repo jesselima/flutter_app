@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'authenticator.dart';
+
 void main() => runApp(
     new MaterialApp(
       home: MyApp()
@@ -32,7 +34,9 @@ class _State extends State<MyApp> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Text("Some Text"),
+              Authenticator(onAuthenticated: _onAuthenticated),
+              Text("AUthenticated $_isAuthenticated"),
+
             ],
           ),
         ),
