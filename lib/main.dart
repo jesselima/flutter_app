@@ -14,6 +14,11 @@ class MyApp extends StatefulWidget {
 
 class _State extends State<MyApp> {
 
+  bool _isAuthenticated;
+
+  void _onAuthenticated(bool value) {
+    setState(() => _isAuthenticated = value);
+  }
 
   @override
   Widget build(BuildContext context) {
