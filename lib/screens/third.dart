@@ -43,8 +43,14 @@ class _Third extends State<Third> {
           child: Column(
             children: <Widget>[
               Text("Third Page"),
-              RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Second"); },  child: Text("Back")),
-              RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Home"); },    child: Text("Back Home")),
+              RaisedButton(onPressed: (){
+                  if(Navigator.of(context).canPop()) { // "canPop" stands for "Can go back in the route history"
+                    Navigator.of(context).pop();
+                  } else {
+                    Navigator.of(context).pushNamed("/Second");
+                  }
+              },
+              child: Text("Back")),
             ],
           ),
         ),

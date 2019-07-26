@@ -43,7 +43,8 @@ class _Home extends State<Home> {
           child: Column(
             children: <Widget>[
               Text("Home Page"),
-              RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Second"); }, child: Text("Next") )
+              RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Second"); }, child: Text("Second")),
+              RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Third"); }, child: Text("Third")),
             ],
           ),
         ),

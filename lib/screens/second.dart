@@ -43,8 +43,8 @@ class _Second extends State<Second> {
           child: Column(
             children: <Widget>[
               Text("Second Page"),
-            RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Third"); }, child: Text("Next")),
-            RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Home"); }, child: Text("Back")),
+            RaisedButton(onPressed: (){ Navigator.of(context).pushNamedAndRemoveUntil("/Third", (Route<dynamic> route) => false); }, child: Text("Next")),
+            RaisedButton(onPressed: (){ Navigator.of(context).pop(); }, child: Text("Back")), // IT MAKES YOU NAVIGATE BACK THROUGH THE HISTORY.
             ],
           ),
         ),
