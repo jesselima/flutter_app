@@ -43,7 +43,12 @@ class _Home extends State<Home> {
           child: Column(
             children: <Widget>[
               Text("Home Page"),
-              RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Second"); }, child: Text("Next") )
+              RaisedButton(onPressed: (){ Navigator
+                  .of(context)
+                  .pushNamedAndRemoveUntil("/Second", (Route<dynamic> route) => false);
+                  // IMPORTANT: When set to false the back arrow is gone (so the route).
+              },
+              child: Text("Next") )
             ],
           ),
         ),
