@@ -1,38 +1,27 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(
-    new MaterialApp(
-      home: MyApp()
-    )
-);
+import './screens/home.dart';
+import './screens/second.dart';
+import './screens/third.dart';
 
-class MyApp extends StatefulWidget {
+void main() => runApp(MyApp());
 
-  @override
-  _State createState() => new _State();
-}
-
-class _State extends State<MyApp> {
-
+class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
 
-    return new Scaffold(
-      appBar: AppBar(
-        title: Text("Title Text"),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(32.0),
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Text("Some Text"),
-            ],
-          ),
-        ),
-      ),
+    return MaterialApp(
+      title: "Navigation",
+      routes: <String, WidgetBuilder> {
+        // All available pages goes here
+        "/Home": (BuildContext context) => Home(),
+        "/Second": (BuildContext context) => Second(),
+        "/Third": (BuildContext context) => Third(),
+      },
+      home: Home(), // First page to display
     );
-  }
 
+  }
 }
+
