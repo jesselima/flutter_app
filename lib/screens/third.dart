@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../code/globalstate.dart';
+
 void main() => runApp(
     new MaterialApp(
       home: Third()
@@ -12,6 +14,8 @@ class Third extends StatefulWidget {
 }
 
 class _Third extends State<Third> {
+
+  GlobalState _store = GlobalState.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,8 @@ class _Third extends State<Third> {
             children: <Widget>[
               Text("Third Page"),
               RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Second"); }, child: Text("Second")),
-              RaisedButton(onPressed: (){ Navigator.of(context).pushNamedAndRemoveUntil("/Home", (Route<dynamic> route) => false); }, child: Text("Next")), // RETURN TO HOME WITHOUT STACK HISTORY
+              RaisedButton(onPressed: (){ Navigator.of(context).pushNamedAndRemoveUntil("/Home", (Route<dynamic> route) => false); }, child: Text("HOME (clear history)")), // RETURN TO HOME WITHOUT STACK HISTORY
+              Text("Value ${_store.get("value")}"),
             ],
           ),
         ),
