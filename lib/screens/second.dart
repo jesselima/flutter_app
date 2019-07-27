@@ -6,7 +6,6 @@ void main() => runApp(
     )
 );
 
-// TODO declare final global objects here
 
 class Second extends StatefulWidget {
   @override
@@ -14,21 +13,6 @@ class Second extends StatefulWidget {
 }
 
 class _Second extends State<Second> {
-
-  // TODO Declare state objects here
-
-  @override
-  void initState() {
-    super.initState();
-    // TODO implement state here
-
-  }
-
-  void _onClick(){
-    setState(() {
-
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
