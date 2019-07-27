@@ -12,6 +12,32 @@ class MyApp extends StatefulWidget {
   _State createState() => new _State();
 }
 
+
+class AnimatedLogo extends AnimatedWidget {
+
+  static final _opacityTween = Tween<double>(begin: 0.1, end: 1.0);
+  static final _sizeTween = Tween<double>(begin: 0.0, end: 300.0);
+  static final _rotateTween = Tween<double>(begin: 0.0, end: 12.0);
+
+  AnimatedLogo({Key key, Animation<double> animation}) : super(key: key, listenable: animation);
+
+  @override
+  Widget build(BuildContext context) {
+    final Animation<double> animation = listenable;
+    return Center(
+      child: Transform.rotate(angle: _rotateTween.evaluate(animation),
+      child: Opacity(opacity: _opacityTween.evaluate(animation),
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 10),
+        height: _sizeTween.evaluate(animation),
+        width: _sizeTween.evaluate(animation),
+        child: FlutterLogo(),
+      ),),),
+    );
+
+  }
+}
+
 class _State extends State<MyApp> with TickerProviderStateMixin {
 
   String _appBarName = "Flutter App";
@@ -22,10 +48,9 @@ class _State extends State<MyApp> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    animationController = AnimationController(duration: const Duration(milliseconds: 5000), vsync: this);
 
-    final CurvedAnimation curvedAnimation = CurvedAnimation(parent: animationController, curve: Curves.easeIn);
-    animation = Tween(begin: 100.0, end: 300.0).animate(curvedAnimation);
+    animationController = AnimationController(duration: const Duration(milliseconds: 2000), vsync: this);
+    animation = CurvedAnimation(parent: animationController, curve: Curves.easeIn);
 
     animation.addStatusListener(listener);
     animationController.forward();
@@ -33,23 +58,12 @@ class _State extends State<MyApp> with TickerProviderStateMixin {
   }
 
   void listener(AnimationStatus status) {
-    if(status ==AnimationStatus.completed) {
+    if(status == AnimationStatus.completed) {
       animationController.reverse();
-    } else if (status ==AnimationStatus.dismissed) {
+    } else if (status == AnimationStatus.dismissed) {
       animationController.forward();
     }
   }
-
-  Widget builder(BuildContext context, Widget child) {
-    // TODO Info ->  WE ARE ANIMATING THE CONTAINER NOT THE FLUTTER LOGO
-    // The Logo is just matching the container in size.
-    return Container(
-      width: animation.value,
-      height: animation.value,
-      child: FlutterLogo(),
-    );
-  }
-
 
   @override
   void dispose() {
@@ -65,10 +79,8 @@ class _State extends State<MyApp> with TickerProviderStateMixin {
         title: Text(_appBarName),
       ),
       body: Container(
-        padding: EdgeInsets.all(32.0),
-        child: Center(
-          child: AnimatedBuilder(animation: animation, builder: builder)
-        ),
+        padding: EdgeInsets.all(32),
+        child: AnimatedLogo(animation: animation),
       ),
     );
   }
