@@ -22,16 +22,27 @@ class _State extends State<MyApp> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    animationController = AnimationController(duration: Duration(milliseconds: 10000), vsync: this);
+    animationController = AnimationController(duration: const Duration(milliseconds: 5000), vsync: this);
 
     final CurvedAnimation curvedAnimation = CurvedAnimation(parent: animationController, curve: Curves.easeIn);
-    animation = Tween(begin: 0.0, end: 300.0).animate(curvedAnimation);
+    animation = Tween(begin: 100.0, end: 300.0).animate(curvedAnimation);
 
+    animation.addStatusListener(listener);
     animationController.forward();
 
   }
 
+  void listener(AnimationStatus status) {
+    if(status ==AnimationStatus.completed) {
+      animationController.reverse();
+    } else if (status ==AnimationStatus.dismissed) {
+      animationController.forward();
+    }
+  }
+
   Widget builder(BuildContext context, Widget child) {
+    // TODO Info ->  WE ARE ANIMATING THE CONTAINER NOT THE FLUTTER LOGO
+    // The Logo is just matching the container in size.
     return Container(
       width: animation.value,
       height: animation.value,
