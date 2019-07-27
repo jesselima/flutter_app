@@ -44,7 +44,7 @@ class _Third extends State<Third> {
             children: <Widget>[
               Text("Third Page"),
               RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Second"); }, child: Text("Second")),
-              RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Home"); }, child: Text("Back to Home")),
+              RaisedButton(onPressed: (){ Navigator.of(context).pushNamedAndRemoveUntil("/Home", (Route<dynamic> route) => false); }, child: Text("Next")), // RETURN TO HOME WITHOUT STACK HISTORY
             ],
           ),
         ),

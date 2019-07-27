@@ -43,7 +43,7 @@ class _Second extends State<Second> {
           child: Column(
             children: <Widget>[
               Text("Second Page"),
-              RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Home"); }, child: Text("Back")),
+              RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Third"); }, child: Text("Third")),
             ],
           ),
         ),
