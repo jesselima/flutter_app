@@ -38,6 +38,17 @@ class _State extends State<MyApp> {
 
               Text(_appBarName),
 
+              Container(
+                width: 300,
+                height: 300,
+                child: Center(child: Text("Hello World!"),),
+                padding: EdgeInsets.all(32),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.orange, width: 2.0),
+                  gradient: RadialGradient(colors: <Color>[Colors.red, Colors.yellow])
+                ),
+              ),
+
             ],
           ),
         ),
