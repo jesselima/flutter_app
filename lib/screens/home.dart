@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'globastate.dart';
+
 void main() => runApp(
     new MaterialApp(
       home: Home()
@@ -14,13 +16,22 @@ class Home extends StatefulWidget {
 
 class _Home extends State<Home> {
 
+  TextEditingController _name;
+  GlobalState _store = GlobalState.instance;
 
   @override
   void initState() {
     super.initState();
-
+    _name = TextEditingController();
+    _store.set("name", "");
+    _name.text = _store.get("name");
   }
 
+  // IMPORTANT - WE DO NOT NEED TO USE SET STATE METHOD INSIDE _onPressed() UNLESS WE NEED TO NOTIFY SOMEONE ABOUT THE STATE CHANGE
+  void _onPressed(){
+    _store.set("name", _name.text);
+    Navigator.of(context).pushNamed("/Second");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +46,11 @@ class _Home extends State<Home> {
           child: Column(
             children: <Widget>[
               Text("Home Page"),
-              RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Second"); }, child: Text("Next")),
+              TextField(
+                controller: _name,
+                decoration: InputDecoration(labelText: "Enter your name"),
+              ),
+              RaisedButton(onPressed: _onPressed, child: Text("Next")),
             ],
           ),
         ),

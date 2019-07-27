@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import './screens/home.dart';
 import './screens/second.dart';
-import './screens/third.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +16,6 @@ class MyApp extends StatelessWidget {
         // All available pages goes here
         "/Home": (BuildContext context) => Home(),
         "/Second": (BuildContext context) => Second(),
-        "/Third": (BuildContext context) => Third(),
       },
       home: Home(), // First page to display
     );

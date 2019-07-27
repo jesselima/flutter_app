@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'globastate.dart';
+
 void main() => runApp(
     new MaterialApp(
       home: Second()
@@ -16,6 +18,7 @@ class Second extends StatefulWidget {
 class _Second extends State<Second> {
 
   // TODO Declare state objects here
+  GlobalState _store = GlobalState.instance;
 
   @override
   void initState() {
@@ -42,8 +45,8 @@ class _Second extends State<Second> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Text("Second Page"),
-              RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Home"); }, child: Text("Back")),
+              Text("Hello ${_store.get("name")}"),
+              RaisedButton(onPressed: (){ Navigator.of(context).pop(); }, child: Text("Back")),
             ],
           ),
         ),
