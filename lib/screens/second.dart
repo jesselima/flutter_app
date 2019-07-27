@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 
-import 'globastate.dart';
-
-void main() => runApp(
-    new MaterialApp(
-      home: Second()
-    )
-);
-
 // TODO declare final global objects here
 
 class Second extends StatefulWidget {
+
+  // IMPORTANT: TO BE ABLE TO PASS VALUE THOUGH ROUTES WE NEED CHANGE THE CONSTRUCTOR
+  // THEN WE CAN PASS THE VALUE THE WAY DOWN THROUGH THE STATE
+  Second(this.name);
+  String name;
+
   @override
-  _Second createState() => new _Second();
+  _SecondState createState() => new _SecondState(name);
 }
 
-class _Second extends State<Second> {
+class _SecondState extends State<Second> {
 
-  // TODO Declare state objects here
-  GlobalState _store = GlobalState.instance;
+  //GlobalState _store = GlobalState.instance;
+  _SecondState(this.name);
+  String name;
 
   @override
   void initState() {
@@ -45,7 +44,8 @@ class _Second extends State<Second> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Text("Hello ${_store.get("name")}"),
+              //Text("Hello ${_store.get("name")}"),
+              Text("Hello $name"),
               RaisedButton(onPressed: (){ Navigator.of(context).pop(); }, child: Text("Back")),
             ],
           ),

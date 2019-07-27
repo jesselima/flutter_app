@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'globastate.dart';
+import 'package:flutter_app/screens/second.dart';
 
 void main() => runApp(
     new MaterialApp(
@@ -17,20 +16,26 @@ class Home extends StatefulWidget {
 class _Home extends State<Home> {
 
   TextEditingController _name;
-  GlobalState _store = GlobalState.instance;
+  //GlobalState _store = GlobalState.instance;
 
   @override
   void initState() {
     super.initState();
     _name = TextEditingController();
-    _store.set("name", "");
-    _name.text = _store.get("name");
+    //_store.set("name", "");
+    //_name.text = _store.get("name");
   }
 
   // IMPORTANT - WE DO NOT NEED TO USE SET STATE METHOD INSIDE _onPressed() UNLESS WE NEED TO NOTIFY SOMEONE ABOUT THE STATE CHANGE
   void _onPressed(){
-    _store.set("name", _name.text);
-    Navigator.of(context).pushNamed("/Second");
+    //_store.set("name", _name.text);
+    //Navigator.of(context).pushNamed("/Second");
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => Second(_name.text), // THIS IS THE INFORMATION TO BE PASSED THROUGH THE CONSTRUCTOR.
+      )
+    );
   }
 
   @override
