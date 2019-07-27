@@ -6,7 +6,6 @@ void main() => runApp(
     )
 );
 
-// TODO declare final global objects here
 
 class Home extends StatefulWidget {
   @override
@@ -15,20 +14,13 @@ class Home extends StatefulWidget {
 
 class _Home extends State<Home> {
 
-  // TODO Declare state objects here
 
   @override
   void initState() {
     super.initState();
-    // TODO implement state here
 
   }
 
-  void _onClick(){
-    setState(() {
-
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +35,7 @@ class _Home extends State<Home> {
           child: Column(
             children: <Widget>[
               Text("Home Page"),
-              RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Second"); }, child: Text("Second")),
-              RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Third"); }, child: Text("Third")),
+              RaisedButton(onPressed: (){ Navigator.of(context).pushNamed("/Second"); }, child: Text("Next")),
             ],
           ),
         ),
