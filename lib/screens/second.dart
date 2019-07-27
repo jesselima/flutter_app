@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './mywidget.dart';
+
 void main() => runApp(
     new MaterialApp(
       home: Second()
@@ -43,8 +45,9 @@ class _Second extends State<Second> {
           child: Column(
             children: <Widget>[
               Text("Second Page"),
-            RaisedButton(onPressed: (){ Navigator.of(context).pushNamedAndRemoveUntil("/Third", (Route<dynamic> route) => false); }, child: Text("Next")),
-            RaisedButton(onPressed: (){ Navigator.of(context).pop(); }, child: Text("Back")), // IT MAKES YOU NAVIGATE BACK THROUGH THE HISTORY.
+              RaisedButton(onPressed: (){ Navigator.of(context).pushNamedAndRemoveUntil("/Third", (Route<dynamic> route) => false); }, child: Text("Next")),
+              RaisedButton(onPressed: (){ Navigator.of(context).pop(); }, child: Text("Back")), // IT MAKES YOU NAVIGATE BACK THROUGH THE HISTORY.
+              MyWidget(),
             ],
           ),
         ),
