@@ -5,17 +5,17 @@ import 'package:contacts_service/contacts_service.dart';
 
 void main() => runApp(
     new MaterialApp(
-      home: ReplaceMe()
+      home: MyApp()
     )
 );
 
 
-class ReplaceMe extends StatefulWidget {
+class MyApp extends StatefulWidget {
   @override
-  _ReplaceMe createState() => new _ReplaceMe();
+  _MyAppState createState() => new _MyAppState();
 }
 
-class _ReplaceMe extends State<ReplaceMe> {
+class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
