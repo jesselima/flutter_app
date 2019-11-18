@@ -184,8 +184,16 @@ class _State extends State<MyApp> {
                   fontSize: 37
                 ),
               ),
-              Text(dateView),
-              Text(bottomNavPositionText),
+              Text(dateView,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20)
+              ),
+              Text(bottomNavPositionText,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20)
+              ),
               RaisedButton(onPressed: _showBottomSheet, child: Text("Open BottomSheet"),),
               RaisedButton(onPressed: _showSnackBar, child: Text("Show Snack"),),
               RaisedButton(onPressed: () =>_showDialog(context, "Add Widgets Here"), child: Text("Show Alert Dialog"),),
