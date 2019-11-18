@@ -17,7 +17,7 @@ enum Answers { YES, NO, MAYBE }
 
 class _State extends State<MyApp> {
 
-  String _appBarName = "Flutter App";
+  String _appBarName = "Hello World!";
 
   // BottomNavigationBar objects and setup. See also bottomNavigationBar at the Scaffold
   List<BottomNavigationBarItem> _items;
@@ -38,16 +38,16 @@ class _State extends State<MyApp> {
   }
 
   // AppBar and Clock (DateTime) Actions
-  int _value = 0;
+  int _counterValue = 0;
   String dateView = "";
   String bottomNavPositionText = "";
 
-  void _add() =>  setState(() =>  _value++);
-  void _remove() => setState(() => _value--);
+  void _addCounterValue() =>  setState(() =>  _counterValue++);
+  void _removeCounterValue() => setState(() => _counterValue--);
   void _onClick() => setState(() => dateView = DateTime.now().toString());
 
   // Bottom Sheet
-  void _showBottom() {
+  void _showBottomSheet() {
     showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
@@ -101,14 +101,9 @@ class _State extends State<MyApp> {
     );
   }
 
-
   // SimpleDialog
-
   String simpleDialogClickedValue = "";
-
-  void _setValue(String value) => setState( () => simpleDialogClickedValue = value);
-
-  Future _askUser() async {
+  Future _askUserDialog() async {
     switch(await
       showDialog(
           context: context,
@@ -134,6 +129,8 @@ class _State extends State<MyApp> {
     }
 
   }
+  void _setValue(String value) => setState( () => simpleDialogClickedValue = value);
+
 
   @override
   Widget build(BuildContext context) {
@@ -149,8 +146,8 @@ class _State extends State<MyApp> {
         title: Text(_appBarName),
         backgroundColor: Colors.redAccent,
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.add), onPressed: _add),
-          IconButton(icon: Icon(Icons.remove), onPressed: _remove)
+          IconButton(icon: Icon(Icons.add), onPressed: _addCounterValue),
+          IconButton(icon: Icon(Icons.remove), onPressed: _removeCounterValue)
         ],
       ),
 
@@ -181,7 +178,7 @@ class _State extends State<MyApp> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Text(_value.toString(),
+              Text(_counterValue.toString(),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 37
@@ -189,11 +186,11 @@ class _State extends State<MyApp> {
               ),
               Text(dateView),
               Text(bottomNavPositionText),
-              RaisedButton(onPressed: _showBottom, child: Text("Open BottomSheet"),),
+              RaisedButton(onPressed: _showBottomSheet, child: Text("Open BottomSheet"),),
               RaisedButton(onPressed: _showSnackBar, child: Text("Show Snack"),),
               RaisedButton(onPressed: () =>_showDialog(context, "Add Widgets Here"), child: Text("Show Alert Dialog"),),
-              RaisedButton(onPressed: () =>_askUser (), child: Text("Show Simple Dialog"),),
-              Text(simpleDialogClickedValue)
+              RaisedButton(onPressed: () =>_askUserDialog (), child: Text("Show Simple Dialog"),),
+              Text("Selected: $simpleDialogClickedValue")
             ],
           ),
         ),
