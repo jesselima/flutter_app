@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 void main() => runApp(
-    new MaterialApp(
+    MaterialApp(
       home: MyApp()
     )
 );
 
 class MyApp extends StatefulWidget {
   @override
-  _State createState() => new _State();
+  _State createState() => _State();
 }
 
 enum Answers { YES, NO, MAYBE }
@@ -80,7 +80,7 @@ class _State extends State<MyApp> {
   // SnackBar
   void _showSnackBar() {
     //  _scaffoldState.currentState access the current ScaffoldState.
-    //  ... In this case The "return new Scaffold(...
+    //  ... In this case The "return Scaffold(...
     _scaffoldState.currentState.showSnackBar(SnackBar(content: Text("Want a snack?")));
   }
 
@@ -135,7 +135,7 @@ class _State extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // build refer to "render". To render something into the screen.
-    return new Scaffold(
+    return Scaffold(
 
       // Reference to GlobalKey<ScaffoldState> from the top. This key object allows us
       //...to access the state of this Scaffold from outside. In this case
